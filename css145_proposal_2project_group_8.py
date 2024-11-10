@@ -17,7 +17,7 @@ Group Members:
 - Rupisan, Anthony James
 """
 
-!pip install pmdarima
+
 
 import kagglehub
 import pandas as pd
