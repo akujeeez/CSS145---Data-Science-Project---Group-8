@@ -23,11 +23,11 @@ GROUP 8 - BM7
 
 <br>
 
-**Name**: 
+**Name**: Perez, Ashton Miguel
 
-**Student number**: 
+**Student number**: 023101048
 
-**GitHub username**: 
+**GitHub username**: a1freed
 
 <br>
 
