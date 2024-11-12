@@ -65,12 +65,12 @@ match_loser_file = st.file_uploader("Upload Match Loser Data (match_loser_data_v
 if challenger_file is not None and match_winner_file is not None and match_loser_file is not None:
     # Read each uploaded file using the provided file-like object from Streamlit
     challenger_df = read_data(challenger_file)
-    match_winner_df = read_data(match_winner_file)
+    match_winner_data = read_data(match_winner_file)
     match_loser_df = read_data(match_loser_file)
 
     # Display the DataFrames or perform further processing
     st.write("Challenger Match Data:", challenger_df.head())
-    st.write("Match Winner Data:", match_winner_df.head())
+    st.write("Match Winner Data:", match_winner_data.head())
     st.write("Match Loser Data:", match_loser_df.head())
     
     # Display the dataframes in the app
@@ -78,7 +78,7 @@ if challenger_file is not None and match_winner_file is not None and match_loser
     st.write(challenger_df)
     
     st.subheader("Match Winner Data")
-    st.write(match_winner_df)
+    st.write(match_winner_data)
     
     st.subheader("Match Loser Data")
     st.write(match_loser_df)
