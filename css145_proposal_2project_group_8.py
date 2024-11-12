@@ -54,12 +54,13 @@ if challenger_df.empty:
   challenger_df = pd.read_csv('challenger_match.csv')
 else:
     print("DataFrame loaded successfully:")
-if match_winner_data.empty:
-match_winner_data = pd.read_csv('match_winner_data_version1.csv')
-else:
-if match_loser_data.empty:
-match_losser_data = pd.read_csv('match_loser_data_version1.csv')
-else:
+    
+    if match_winner_data.empty:
+    match_winner_data = pd.read_csv('match_winner_data_version1.csv')
+    else:
+        if match_loser_data.empty:
+        match_losser_data = pd.read_csv('match_loser_data_version1.csv')
+        else:
 
 st.write(match_winner_data.head())
 st.write(match_losser_data.head())
