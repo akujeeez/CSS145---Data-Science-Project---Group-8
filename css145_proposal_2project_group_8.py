@@ -111,18 +111,22 @@ if challenger_file is not None and match_winner_file is not None and match_loser
     A heatmap can be used to determine whether properties, like multicollinearity, may be redundant because of strong correlation. In a predictive model, correlations aid in the selection of features since strongly linked data may offer duplicate information and may be removed or transformed. high negative correlations, near-zero correlations, and high positive correlations are all displayed in the heatmap.
     """
     
+    plt.figure()  # Create a new figure for the role distribution
     sns.countplot(data=challenger_df, x='role')
     plt.xlabel('Role')
     plt.ylabel('Count')
     plt.title('Distribution of Roles')
-    st.pyplot()
+    st.pyplot(plt)  # Display the current plot
+    plt.clf()  # Clear the figure after displaying
     
     # Plotting the lane distribution
+    plt.figure()  # Create a new figure for the lane distribution
     sns.countplot(data=challenger_df, x='lane')
     plt.xlabel('Lane')
     plt.ylabel('Count')
     plt.title('Distribution of Lanes')
-    st.pyplot()
+    st.pyplot(plt)  # Display the current plot
+    plt.clf()  # Clear the figure after displaying
     
     """To see the distribution of role and lane categories within the challenger_df DataFrame that which most likely contains data from the League of Legends dataset that the code blocks create count charts. Different player roles' frequency in the dataset is indicated by the first figure, which counts and shows the number of observations for each distinct value in the role column. How frequently certain lanes are represented in the data is displayed in the second figure, which displays the distribution of the lane column.
     
