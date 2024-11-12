@@ -102,7 +102,7 @@ if challenger_file is not None and match_winner_file is not None and match_loser
     plt.figure(figsize=(10, 8))
     sns.heatmap(numerical_df.corr(), annot=True, cmap="coolwarm")
     plt.title("Feature Correlations")
-    st.pyplot()
+    st.pyplot(plt)
     
     """A heatmap that shows the relationship between the challenger_df DataFrame's numerical attributes. For the numerical features, it computes the correlation matrix after choosing columns with numerical data types. In order to display the correlation values in each cell, sns.heatmap(numerical_df.corr(), annot=True, cmap="coolwarm") is used to construct the heatmap graphic. The "coolwarm" color map setting is used to show whether there is a positive or negative link. To improve readability, figsize=(10, 8) is used to present the plot.
     
@@ -115,14 +115,14 @@ if challenger_file is not None and match_winner_file is not None and match_loser
     plt.xlabel('Role')
     plt.ylabel('Count')
     plt.title('Distribution of Roles')
-    st.pyplot()
+    st.pyplot(plt)
     
     # Plotting the lane distribution
     sns.countplot(data=challenger_df, x='lane')
     plt.xlabel('Lane')
     plt.ylabel('Count')
     plt.title('Distribution of Lanes')
-    st.pyplot()
+    st.pyplot(plt)
     
     """To see the distribution of role and lane categories within the challenger_df DataFrame that which most likely contains data from the League of Legends dataset that the code blocks create count charts. Different player roles' frequency in the dataset is indicated by the first figure, which counts and shows the number of observations for each distinct value in the role column. How frequently certain lanes are represented in the data is displayed in the second figure, which displays the distribution of the lane column.
     
@@ -136,7 +136,7 @@ if challenger_file is not None and match_winner_file is not None and match_loser
     plt.xlabel('Season')
     plt.ylabel('Count')
     plt.title('Games per Season')
-    st.pyplot()
+    st.pyplot(plt)
     
     """The seasons are shown on the x-axis, and "Count" is written on the y-axis. A brief visual examination of the quantity of games recorded for each season in the dataset is then provided by the plot, which is subsequently generated. Finding trends, figuring out the distribution of data, and researching variations in player behavior or game meta over time can all benefit from this.
     
@@ -160,7 +160,7 @@ if challenger_file is not None and match_winner_file is not None and match_loser
     plt.ylabel('Count')
     plt.title('Role Frequency by Lane')
     plt.legend(title='Role')
-    st.pyplot()
+    st.pyplot(plt)
     
     """To create a stacked bar chart to display the challenger_df DataFrame's player role distribution across several lanes. In League of Legends, where roles and lanes are essential elements of gameplay, this is especially pertinent. Plotting a stacked bar chart with each bar representing the number of distinct roles within a lane is done by the code snippet after grouping the data by lane and role using the unstack() technique.
     
@@ -225,7 +225,7 @@ if challenger_file is not None and match_winner_file is not None and match_loser
     plt.xlabel('Game Events')
     plt.ylabel('Frequency of Occurrence')
     plt.xticks(rotation=45)
-    st.pyplot()
+    st.pyplot(plt)
     
     """A visual representation of the frequency distribution of important League of Legends game events. A bar chart, which shows the frequency of each significant event across all matches in the dataset, is used to examine the data. The color scheme is used to create a visually striking and captivating bar chart.
     
@@ -292,7 +292,7 @@ if challenger_file is not None and match_winner_file is not None and match_loser
     plt.tight_layout()
     
     # Show the plot
-    st.pyplot()
+    st.pyplot(plt)
     
     """In a League of Legends dataset, the algorithm generates a comparative graphic of important game events for both winners and losers. Two subplots that one for winners and one for losers are created in a 12x8 figure. A bar chart for winners is shown in the subplots, where red bars indicate poor outcomes and green bars indicate favorable ones. The winners' chart is mirrored in the plot for side-by-side comparison. The plot is then adjusted to make sure the subplots are sufficiently spaced apart and do not overlap. The analysis assists in determining the strategic distinctions between winners and losers, including the significance of early-game goals like firstBaron or firstBlood.
     
@@ -323,7 +323,7 @@ if challenger_file is not None and match_winner_file is not None and match_loser
     plt.ylabel('Role')
     
     # Show the plot
-    st.pyplot()
+    st.pyplot(plt)
     
     """To see the frequency distribution of roles in the League of Legends Challenger dataset, the code generates a count plot. With responsibilities on the y-axis and their counts on the x-axis, the display is horizontal. "Count" and "Role" are selected for the title and labels, respectively. Bars representing the most prevalent roles in the Challenger dataset are shown in the plot, arranged from most to least frequent. This aids in highlighting the most well-liked or often performed roles in the League of Legends Challenger level. Higher-count roles could be a sign of top-tier players' preferred metas or tactics.
     
@@ -340,7 +340,7 @@ if challenger_file is not None and match_winner_file is not None and match_loser
     
     # Use pairplot to uncover relationships (this is just an example, you can change columns)
     sns.pairplot(challenger_df[['lane', 'role_encoded']])
-    st.pyplot()
+    st.pyplot(plt)
     
     """In a numerical categorical format, the 'role' column gives each distinct role value a unique integer code. This is helpful for models or graphs that rely on numbers. To find patterns or connections between roles, the code creates a pairplot by plotting the lane against the encoded role column. This graphic aids in investigating the distribution of roles in various lanes and whether some roles are more common in particular lanes. For every pair of attributes, the pairplot creates a scatter plot that illustrates how roles correspond to various lanes.
     
@@ -356,7 +356,7 @@ if challenger_file is not None and match_winner_file is not None and match_loser
     
     # Use pairplot to uncover relationships (this is just an example, you can change columns)
     sns.pairplot(challenger_df[['season', 'role_encoded']])
-    st.pyplot()
+    st.pyplot(plt)
     
     """Season and role_encoded are the two elements that make up the League of Legends dataset. Each distinct role has a corresponding integer in the role column, which is a category feature. For every pair of variables in the given subset of columns, the sns.pairplot() function creates a scatter plot, displaying correlations between the season and the players' encoded roles. The distribution of the encoded roles across the seasons is displayed in the scatter plot; any grouping or clustering suggests that the popularity of particular roles varies over time or that some roles are more prevalent in particular seasons. The distribution of responsibilities appears to be very stable throughout seasons if the scatter plot looks random.
     
@@ -436,7 +436,7 @@ if challenger_file is not None and match_winner_file is not None and match_loser
     plt.xlabel("Season")
     plt.ylabel("Role Encoded Value")
     plt.legend()
-    st.pyplot()
+    st.pyplot(plt)
     
     # Visualize the distribution of 'role_encoded' across the different seasons
     plt.figure(figsize=(10, 6))
@@ -444,7 +444,7 @@ if challenger_file is not None and match_winner_file is not None and match_loser
     plt.title('Role Distribution Across Seasons')
     plt.xlabel('Season')
     plt.ylabel('Count of Roles')
-    st.pyplot()
+    st.pyplot(plt)
     
     """In order to examine the role_encoded column and forecast future values based on historical data, this Python function prepares the challenger_df dataset. The ARIMA model is used to forecast future values based on historical data. A bar plot is generated to show how roles are distributed across the various seasons, and a projection is made for the next five seasons.
     
@@ -466,7 +466,7 @@ if challenger_file is not None and match_winner_file is not None and match_loser
     plt.figure(figsize=(10, 6))
     plt.plot(residuals)
     plt.title('Residuals of ARIMA Model')
-    st.pyplot()
+    st.pyplot(plt)
     
     # Check residuals summary
     st.write(residuals.describe())
@@ -474,7 +474,7 @@ if challenger_file is not None and match_winner_file is not None and match_loser
     # Check if residuals are normally distributed
     sns.histplot(residuals, kde=True)
     plt.title('Distribution of Residuals')
-    st.pyplot()
+    st.pyplot(plt)
     
     """The disparities between actual and anticipated values, or the model's errors, are known as the residuals of the ARIMA model. The residuals of a successful ARIMA model should have a mean that is near zero and a steady distribution around zero. To determine if the residuals are normally distributed, a histogram including the kernel density estimate (KDE) is employed. It indicates that the model has successfully captured the underlying dynamics of the data if the residuals plot displays no obvious pattern."""
     
@@ -507,7 +507,7 @@ if challenger_file is not None and match_winner_file is not None and match_loser
     plt.xlabel("Season")
     plt.ylabel("Role Encoded Value")
     plt.legend()
-    st.pyplot()
+    st.pyplot(plt)
     
     """Future patterns for the upcoming five seasons are forecast using the ARIMA model. The confidence intervals show the range of values that the genuine value could fall within, while the predicted values are based on historical role-encoded data. The graphic displays the predicted values, the confidence intervals, and the historical role-encoded data. The predicted values are shown by the orange line, and the confidence intervals that which show the degree of uncertainty surrounding the forecast that are shown by the shaded area.
     
@@ -522,7 +522,7 @@ if challenger_file is not None and match_winner_file is not None and match_loser
     plt.title('Role Encoded Distribution Across Seasons')
     plt.xlabel('Season')
     plt.ylabel('Role Encoded')
-    st.pyplot()
+    st.pyplot(plt)
     
     # Check if seasonality exists in the data
     plt.figure(figsize=(10, 6))
@@ -530,7 +530,7 @@ if challenger_file is not None and match_winner_file is not None and match_loser
     plt.title('Role Encoded Distribution Across Seasons')
     plt.xlabel('Season')
     plt.ylabel('Role Encoded')
-    st.pyplot()
+    st.pyplot(plt)
     
     plt.tight_layout()
     
@@ -567,7 +567,7 @@ if challenger_file is not None and match_winner_file is not None and match_loser
     plt.xlabel('Season')
     plt.ylabel('Role Encoded Value')
     plt.colorbar(label='Cluster')
-    st.pyplot()
+    st.pyplot(plt)
     
     """A scatter plot to show how data points are distributed according to role-encoded values and seasons. Each data point is given a color in the plot using cluster labels, and the color map is set to "viridis" to make differentiation simpler. By adding transparency to the points, the alpha=0.6 setting increases the visibility of overlapping points. The plot can highlight trends or patterns in the data, like the close connections between season and role encoding. Plot coloring requires a Cluster column, which should be present in the data DataFrame. To further clarify the plot, the code additionally incorporates a title, labels, and color bars."""
     
@@ -582,7 +582,7 @@ if challenger_file is not None and match_winner_file is not None and match_loser
     plt.title('Elbow Method for Optimal Number of Clusters')
     plt.xlabel('Number of Clusters')
     plt.ylabel('Inertia')
-    st.pyplot()
+    st.pyplot(plt)
     
     """A Python program called the Elbow Method uses the inertia value to determine the ideal number of clusters for KMeans clustering. The code tests for 1–10 clusters and initializes an empty list to hold the inertia values for each number of clusters. The total of squared distances between samples and their nearest cluster center is the inertia, which is determined by fitting the KMeans model to the data. The "elbow point" is the point at which the rate of inertia decreases noticeably. The plot displays the inertia values against the number of clusters.
     
@@ -665,7 +665,7 @@ if challenger_file is not None and match_winner_file is not None and match_loser
         plt.ylabel("Predicted Season")
         plt.title("Actual vs Predicted Season")
         plt.grid(True)
-        st.pyplot()
+        st.pyplot(plt)
     
     # Main Execution
     data = load_data('challenger_match.csv')  # Replace with your dataset path
@@ -702,7 +702,7 @@ if challenger_file is not None and match_winner_file is not None and match_loser
     plt.xlabel("Season")
     plt.ylabel("Number of Games")
     plt.grid(True)
-    st.pyplot()
+    st.pyplot(plt)
     
     """To plot the number of games played in each lane during a season, this  generates a DataFrame. After classifying the dataset according to the columns Season and Lane, a line plot is produced using pandas' plot() method. For easier reading, the plot has grid lines, a title, and labels for the x and y axes. Each line represents a lane, the y-axis shows the number of games played in each lane, and the x-axis shows the various seasons. This illustrates how the number of games has evolved over time."""
     
@@ -720,7 +720,7 @@ if challenger_file is not None and match_winner_file is not None and match_loser
     plt.ylabel("Number of Games")
     plt.legend()
     plt.grid(True)
-    st.pyplot()
+    st.pyplot(plt)
     
     """This illustrates how to display a 5-season rolling average and the number of games played in a season. It entails counting the number of games played in each season and classifying the dataset according to the season column. In order to smooth out short-term volatility and aid in identifying long-term trends, the code then computes a rolling average using the.rolling(window=5) method.
     
@@ -757,7 +757,7 @@ if challenger_file is not None and match_winner_file is not None and match_loser
     plt.ylabel("Game Data (or whatever metric you use)")
     plt.legend()
     plt.grid(True)
-    st.pyplot()
+    st.pyplot(plt)
     
     # Evaluate the model using Mean Squared Error (MSE)
     mse = mean_squared_error(y_test, y_pred)
@@ -800,7 +800,7 @@ if challenger_file is not None and match_winner_file is not None and match_loser
     plt.ylabel("Game Data (or whatever target you're predicting)")
     plt.legend()
     plt.grid(True)
-    st.pyplot()
+    st.pyplot(plt)
     
     # You can st.write future predictions if needed:
     st.write(f"Future Predictions for the next 5 years:\n{future_predictions}")
