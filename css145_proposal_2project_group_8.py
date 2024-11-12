@@ -75,6 +75,16 @@ if challenger_file is not None and match_winner_file is not None and match_loser
     challenger_df = pd.read_csv('challenger_match.csv')
     match_winner_data = pd.read_csv('match_winner_data_version1.csv')
     match_losser_data = pd.read_csv('match_loser_data_version1.csv')
+
+    # Display the dataframes
+    st.write("Challenger Match Data:")
+    st.dataframe(challenger_df)
+
+    st.write("Match Winner Data:")
+    st.dataframe(match_winner_data)
+
+    st.write("Match Loser Data:")
+    st.dataframe(match_losser_data)
     
     st.write(match_winner_data.head())
     st.write(match_losser_data.head())
