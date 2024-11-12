@@ -49,7 +49,7 @@ from sklearn.metrics import mean_absolute_error
 
 csv_files = [
     'challenger_match.csv',
-    '/root/.cache/kagglehub/datasets/gyejr95/league-of-legendslol-ranked-games-2020-ver1/versions/4/match_data_version1.csv',
+    'match_data_version1.csv',
     'match_loser_data_version1.csv',
     'match_winner_data_version1.csv'
 ]
