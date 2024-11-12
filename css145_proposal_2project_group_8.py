@@ -50,18 +50,24 @@ from sklearn.metrics import mean_absolute_error
 import pandas as pd
 # Load the challenger match data for initial analysis
 
-# Function to read data from a CSV file
 def read_data(file):
-    df = pd.read_csv(file, encoding='gbk')
-    return df
+    # Use StringIO to read the uploaded file content
+    content = StringIO(file.getvalue().decode("utf-8")).read()
+    # Create a temporary file path
+    temp_filepath = f"/tmp/{uuid4()}.csv"
+    # Write the content to a temporary file
+    with open(temp_filepath, "w") as f:
+        f.write(content)
+    # Read the CSV file into a DataFrame
+    return pd.read_csv(temp_filepath)
 
 # Streamlit application
 st.title("Upload CSV Files")
 
 # File uploader for the three CSV files
-challenger_file = st.file_uploader("Upload Challenger Match Data (challenger_match.csv)", type="csv")
-match_winner_file = st.file_uploader("Upload Match Winner Data (match_winner_data_version1.csv)", type="csv")
-match_loser_file = st.file_uploader("Upload Match Loser Data (match_loser_data_version1.csv)", type="csv")
+challenger_file = st.file_uploader("Upload Challenger Match Data (challenger_match.csv)", type=["csv", "txt"])
+match_winner_file = st.file_uploader("Upload Match Winner Data (match_winner_data_version1.csv)", type=["csv", "txt"])
+match_loser_file = st.file_uploader("Upload Match Loser Data (match_loser_data_version1.csv)", type=["csv", "txt"])
 
 # Check if files are uploaded
 if challenger_file is not None and match_winner_file is not None and match_loser_file is not None:
