@@ -182,9 +182,6 @@ if challenger_file is not None and match_winner_file is not None and match_loser
     Players, analysts, and coaches that wish to research trends and improve tactics based on role distributions can benefit from data-driven decision-making.
     """
     
-    file_path = 'challenger_match.csv'  # Replace with the actual path to your CSV file
-    challenger_df = pd.read_csv(file_path)
-    
     # Display the first few rows of the DataFrame
     challenger_df.head()
     
