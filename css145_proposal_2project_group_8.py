@@ -18,7 +18,8 @@ Group Members:
 """
 
 import pyarrow.csv as pv
-
+from io import StringIO
+from uuid import uuid4
 import streamlit as st
 import pandas as pd
 import matplotlib.pyplot as plt
@@ -48,19 +49,9 @@ from pmdarima import auto_arima
 
 from sklearn.metrics import mean_absolute_error
 
-import pandas as pd
-# Load the challenger match data for initial analysis
-
 def read_data(file):
-    # Use StringIO to read the uploaded file content
-    content = StringIO(file.getvalue().decode("utf-8")).read()
-    # Create a temporary file path
-    temp_filepath = f"/tmp/{uuid4()}.csv"
-    # Write the content to a temporary file
-    with open(temp_filepath, "w") as f:
-        f.write(content)
-    # Read the CSV file into a DataFrame
-    return pd.read_csv(temp_filepath)
+    # Read the uploaded file content directly into a DataFrame
+    return pd.read_csv(file)
 
 # Streamlit application
 st.title("Upload CSV Files")
@@ -70,16 +61,17 @@ challenger_file = st.file_uploader("Upload Challenger Match Data (challenger_mat
 match_winner_file = st.file_uploader("Upload Match Winner Data (match_winner_data_version1.csv)", type=["csv", "txt"])
 match_loser_file = st.file_uploader("Upload Match Loser Data (match_loser_data_version1.csv)", type=["csv", "txt"])
 
-
 # Check if files are uploaded
 if challenger_file is not None and match_winner_file is not None and match_loser_file is not None:
-    challenger_table = pv.read_csv('challenger_match.csv')
-    match_winner_table = pv.read_csv('match_winner_data_version1.csv')
-    match_losser_table = pv.read_csv('match_loser_data_version1.csv')
+    # Read each uploaded file using the provided file-like object from Streamlit
+    challenger_df = read_data(challenger_file)
+    match_winner_df = read_data(match_winner_file)
+    match_loser_df = read_data(match_loser_file)
 
-    challenger_df = challenger_table.to_pandas()
-    match_winner_data = match_winner_table.to_pandas()
-    match_losser_data = match_losser_table.to_pandas()
+    # Display the DataFrames or perform further processing
+    st.write("Challenger Match Data:", challenger_df.head())
+    st.write("Match Winner Data:", match_winner_df.head())
+    st.write("Match Loser Data:", match_loser_df.head())
     
     # Display the dataframes in the app
     st.subheader("Challenger Match Data")
