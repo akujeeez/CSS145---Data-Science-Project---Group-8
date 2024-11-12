@@ -17,6 +17,7 @@ Group Members:
 - Rupisan, Anthony James
 """
 
+import pyarrow.csv as pv
 
 import streamlit as st
 import pandas as pd
@@ -69,22 +70,26 @@ challenger_file = st.file_uploader("Upload Challenger Match Data (challenger_mat
 match_winner_file = st.file_uploader("Upload Match Winner Data (match_winner_data_version1.csv)", type=["csv", "txt"])
 match_loser_file = st.file_uploader("Upload Match Loser Data (match_loser_data_version1.csv)", type=["csv", "txt"])
 
+
 # Check if files are uploaded
 if challenger_file is not None and match_winner_file is not None and match_loser_file is not None:
+    challenger_table = pv.read_csv('challenger_match.csv')
+    match_winner_table = pv.read_csv('match_winner_data_version1.csv')
+    match_losser_table = pv.read_csv('match_loser_data_version1.csv')
 
-    challenger_df = pd.read_csv('challenger_match.csv')
-    match_winner_data = pd.read_csv('match_winner_data_version1.csv')
-    match_losser_data = pd.read_csv('match_loser_data_version1.csv')
-
-    # Display the dataframes
-    st.write("Challenger Match Data:")
-    st.dataframe(challenger_df)
-
-    st.write("Match Winner Data:")
-    st.dataframe(match_winner_data)
-
-    st.write("Match Loser Data:")
-    st.dataframe(match_losser_data)
+    challenger_df = challenger_table.to_pandas()
+    match_winner_data = match_winner_table.to_pandas()
+    match_losser_data = match_losser_table.to_pandas()
+    
+    # Display the dataframes in the app
+    st.subheader("Challenger Match Data")
+    st.write(challenger_df)
+    
+    st.subheader("Match Winner Data")
+    st.write(match_winner_df)
+    
+    st.subheader("Match Loser Data")
+    st.write(match_losser_df)
     
     st.write(match_winner_data.head())
     st.write(match_losser_data.head())
