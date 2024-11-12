@@ -37,7 +37,7 @@ from sklearn.tree import DecisionTreeClassifier
 import numpy as np
 import json
 from sklearn.metrics import accuracy_score
-
+from statsmodels.tsa.arima.model import ARIMA
 from sklearn.preprocessing import OneHotEncoder
 from sklearn.compose import ColumnTransformer
 
