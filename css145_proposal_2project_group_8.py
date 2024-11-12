@@ -492,7 +492,7 @@ if challenger_file is not None and match_winner_file is not None and match_loser
     
     """The disparities between actual and anticipated values, or the model's errors, are known as the residuals of the ARIMA model. The residuals of a successful ARIMA model should have a mean that is near zero and a steady distribution around zero. To determine if the residuals are normally distributed, a histogram including the kernel density estimate (KDE) is employed. It indicates that the model has successfully captured the underlying dynamics of the data if the residuals plot displays no obvious pattern."""
     
-    # Find the best ARIMA model automatically
+        # Find the best ARIMA model automatically
     auto_model = auto_arima(data['role_encoded'], seasonal=True, m=1, stepwise=True, trace=True)
     
     # Fit the selected model
@@ -501,28 +501,34 @@ if challenger_file is not None and match_winner_file is not None and match_loser
     # Forecast with the new model
     arima_forecast_auto = auto_model_fit.predict(n_periods=forecast_seasons)
     
+    # Get the last 5 data points for MAE calculation
     test_data = data.tail(5)
     
-    mae = mean_absolute_error(test_data['role_encoded'], arima_forecast[:len(test_data)]) # Ensure you are comparing the same number of data points.
+    # Calculate Mean Absolute Error
+    mae = mean_absolute_error(test_data['role_encoded'], arima_forecast_auto[:len(test_data)])  # Ensure you are comparing the same number of data points.
     st.write(f'Mean Absolute Error: {mae}')
     
     # Get forecast with confidence intervals
-    forecast_values = arima_model_fit.get_forecast(steps=forecast_seasons)
+    forecast_values = auto_model_fit.get_forecast(steps=forecast_seasons)
     forecast_mean = forecast_values.predicted_mean
     forecast_ci = forecast_values.conf_int()
+    
+    # Create forecast dates
+    forecast_dates = pd.date_range(start=data.index[-1] + pd.Timedelta(days=1), periods=forecast_seasons, freq='M')
     
     # Plot forecast with confidence intervals
     plt.figure(figsize=(10, 6))
     plt.plot(data.index, data['role_encoded'], label='Historical Role Encoded Data', color='blue')
     plt.plot(forecast_dates, forecast_mean, label='ARIMA Forecast', color='orange')
+    
     # Access confidence intervals using column names instead of slicing
-    plt.fill_between(forecast_dates, forecast_ci['lower role_encoded'], forecast_ci['upper role_encoded'], color='orange', alpha=0.3)
+    plt.fill_between(forecast_dates, forecast_ci.iloc[:, 0], forecast_ci.iloc[:, 1], color='orange', alpha=0.3)
     plt.title("Role Encoded Forecast by Season with Confidence Intervals")
     plt.xlabel("Season")
     plt.ylabel("Role Encoded Value")
     plt.legend()
     st.pyplot(plt)
-    
+        
     """Future patterns for the upcoming five seasons are forecast using the ARIMA model. The confidence intervals show the range of values that the genuine value could fall within, while the predicted values are based on historical role-encoded data. The graphic displays the predicted values, the confidence intervals, and the historical role-encoded data. The predicted values are shown by the orange line, and the confidence intervals that which show the degree of uncertainty surrounding the forecast that are shown by the shaded area.
     
     <br>
