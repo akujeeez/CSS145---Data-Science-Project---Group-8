@@ -66,12 +66,12 @@ if challenger_file is not None and match_winner_file is not None and match_loser
     # Read each uploaded file using the provided file-like object from Streamlit
     challenger_df = read_data(challenger_file)
     match_winner_data = read_data(match_winner_file)
-    match_loser_df = read_data(match_loser_file)
+    match_loser_data = read_data(match_loser_file)
 
     # Display the DataFrames or perform further processing
     st.write("Challenger Match Data:", challenger_df.head())
     st.write("Match Winner Data:", match_winner_data.head())
-    st.write("Match Loser Data:", match_loser_df.head())
+    st.write("Match Loser Data:", match_loser_data.head())
     
     # Display the dataframes in the app
     st.subheader("Challenger Match Data")
@@ -81,10 +81,10 @@ if challenger_file is not None and match_winner_file is not None and match_loser
     st.write(match_winner_data)
     
     st.subheader("Match Loser Data")
-    st.write(match_loser_df)
+    st.write(match_loser_data)
     
     st.write(match_winner_data.head())
-    st.write(match_losser_data.head())
+    st.write(match_loser_data.head())
     
     # Check for missing values
     missing_values = challenger_df.isnull().sum()
@@ -249,7 +249,7 @@ if challenger_file is not None and match_winner_file is not None and match_loser
     
     # For loser dataset
     for column in columns_to_check:
-        st.write(f"Loser dataset - {column} unique values:\n", match_losser_data[column].unique(), "\n")
+        st.write(f"Loser dataset - {column} unique values:\n", match_loser_data[column].unique(), "\n")
     
     # Convert boolean columns to integers (True -> 1, False -> 0) for both datasets
     columns_to_check = [
@@ -260,11 +260,11 @@ if challenger_file is not None and match_winner_file is not None and match_loser
     
     # Ensure columns are converted to integers where needed
     match_winner_data[columns_to_check] = match_winner_data[columns_to_check].astype(int)
-    match_losser_data[columns_to_check] = match_losser_data[columns_to_check].astype(int)
+    match_loser_data[columns_to_check] = match_loser_data[columns_to_check].astype(int)
     
     # Count occurrences of events for both winner and loser datasets
     winner_event_counts = match_winner_data[columns_to_check].sum()
-    loser_event_counts = match_losser_data[columns_to_check].sum()
+    loser_event_counts = match_loser_data[columns_to_check].sum()
     
     # Display the counts for both datasets
     st.write("Winner event counts:\n", winner_event_counts)
