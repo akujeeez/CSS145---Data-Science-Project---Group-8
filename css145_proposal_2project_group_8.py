@@ -49,14 +49,14 @@ from sklearn.metrics import mean_absolute_error
 
 import pandas as pd
 # Load the challenger match data for initial analysis
-challenger_df = pd.read_csv('challenger_match.csv')
+challenger_df = pd.read_csv('https://raw.githubusercontent.com/akujeeez/CSS145---Data-Science-Project---Group-8/refs/heads/main/challenger_match.csv')
 
 # Display the first few rows and basic info about the challenger dataset
 st.write(challenger_df.head())  # View the first few rows
 st.write(challenger_df.info())  # Get a summary of columns, types, and null values
 
-match_winner_data = pd.read_csv('match_winner_data_version1.csv')
-match_losser_data = pd.read_csv('match_loser_data_version1.csv')
+match_winner_data = pd.read_csv('https://raw.githubusercontent.com/akujeeez/CSS145---Data-Science-Project---Group-8/refs/heads/main/match_winner_data_version1.csv')
+match_losser_data = pd.read_csv('https://raw.githubusercontent.com/akujeeez/CSS145---Data-Science-Project---Group-8/refs/heads/main/match_loser_data_version1.csv')
 
 st.write(match_winner_data.head())
 st.write(match_losser_data.head())
