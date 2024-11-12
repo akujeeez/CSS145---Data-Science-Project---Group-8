@@ -51,9 +51,9 @@ import pandas as pd
 # Load the challenger match data for initial analysis
 
 
-challenger_df = pd.read_csv('challenger_match.csv', delimiter=';')
-match_winner_data = pd.read_csv('match_winner_data_version1.csv', delimiter=';')
-match_losser_data = pd.read_csv('match_loser_data_version1.csv', delimiter=';')
+challenger_df = pd.read_csv('challenger_match.csv', delimiter=';',header=None)
+match_winner_data = pd.read_csv('match_winner_data_version1.csv', delimiter=';',header=None)
+match_losser_data = pd.read_csv('match_loser_data_version1.csv', delimiter=';',header=None)
 
 st.write(match_winner_data.head())
 st.write(match_losser_data.head())
