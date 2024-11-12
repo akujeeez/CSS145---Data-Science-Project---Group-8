@@ -398,6 +398,7 @@ if challenger_file is not None and match_winner_file is not None and match_loser
     # Assuming 'challenger_df' is your DataFrame
     
     # Select numeric columns
+    # Select numeric columns
     numeric_cols = challenger_df.select_dtypes(include=['float64', 'int64']).columns
     
     # Calculate Z-scores for numeric columns
@@ -408,17 +409,19 @@ if challenger_file is not None and match_winner_file is not None and match_loser
     
     # Display rows with outliers
     st.write("Outliers Detected (Rows):")
-    display(challenger_df[outliers])
+    st.write(challenger_df[outliers])  # Display DataFrame with detected outliers
     
+    # Prepare data for ARIMA model
     data = challenger_df[['season', 'role_encoded']].dropna()
     
-    # Sort data by 'season' to ensure it's chronological
+    # Sort data by 'season' to ensure chronological order
     data = data.sort_values('season')
     
     # Set 'season' as the index (time variable)
     data.set_index('season', inplace=True)
     
-    # Check for data consistency (look at a summary of 'role_encoded')
+    # Display a summary for 'role_encoded'
+    st.write("Summary of 'role_encoded':")
     st.write(data.describe())
     
     # Fit ARIMA model for 'role_encoded'
@@ -427,7 +430,7 @@ if challenger_file is not None and match_winner_file is not None and match_loser
     
     # Forecast for the next 5 seasons
     forecast_seasons = 5
-    forecast_dates = pd.date_range(start=data.index[-1], periods=forecast_seasons+1, freq='A')[1:]  # 'A' for annual frequency
+    forecast_dates = pd.date_range(start=data.index[-1] + pd.DateOffset(years=1), periods=forecast_seasons, freq='A')
     arima_forecast = arima_model_fit.forecast(steps=forecast_seasons)
     
     # Plotting the forecast
@@ -438,16 +441,16 @@ if challenger_file is not None and match_winner_file is not None and match_loser
     plt.xlabel("Season")
     plt.ylabel("Role Encoded Value")
     plt.legend()
-    st.pyplot(plt)
+    st.pyplot(plt)  # Display the forecast plot
     
-    # Visualize the distribution of 'role_encoded' across the different seasons
+    # Visualize the distribution of 'role_encoded' across different seasons
     plt.figure(figsize=(10, 6))
-    sns.countplot(data=data, x='season', hue='role_encoded')
+    sns.countplot(data=challenger_df, x='season', hue='role_encoded')
     plt.title('Role Distribution Across Seasons')
     plt.xlabel('Season')
     plt.ylabel('Count of Roles')
-    st.pyplot(plt)
-    
+    st.pyplot(plt)  # Display the distribution plot
+        
     """In order to examine the role_encoded column and forecast future values based on historical data, this Python function prepares the challenger_df dataset. The ARIMA model is used to forecast future values based on historical data. A bar plot is generated to show how roles are distributed across the various seasons, and a projection is made for the next five seasons.
     
     <br>
