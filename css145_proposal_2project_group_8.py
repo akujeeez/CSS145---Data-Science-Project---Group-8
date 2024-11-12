@@ -411,8 +411,11 @@ if challenger_file is not None and match_winner_file is not None and match_loser
     st.write("Outliers Detected (Rows):")
     st.write(challenger_df[outliers])  # Display DataFrame with detected outliers
     
-    # Prepare data for ARIMA model
+       # Prepare data for ARIMA model
     data = challenger_df[['season', 'role_encoded']].dropna()
+    
+    # Convert 'season' to datetime format if it is not already
+    data['season'] = pd.to_datetime(data['season'], errors='coerce')
     
     # Sort data by 'season' to ensure chronological order
     data = data.sort_values('season')
@@ -430,7 +433,13 @@ if challenger_file is not None and match_winner_file is not None and match_loser
     
     # Forecast for the next 5 seasons
     forecast_seasons = 5
-    forecast_dates = pd.date_range(start=data.index[-1] + pd.DateOffset(years=1), periods=forecast_seasons, freq='A')
+    
+    # Ensure that the index is a datetime index before adding DateOffset
+    if pd.api.types.is_datetime64_any_dtype(data.index):
+        forecast_dates = pd.date_range(start=data.index[-1] + pd.DateOffset(years=1), periods=forecast_seasons, freq='A')
+    else:
+        st.error("The index is not in datetime format.")
+    
     arima_forecast = arima_model_fit.forecast(steps=forecast_seasons)
     
     # Plotting the forecast
