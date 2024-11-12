@@ -81,7 +81,7 @@ if challenger_file is not None and match_winner_file is not None and match_loser
     st.write(match_winner_df)
     
     st.subheader("Match Loser Data")
-    st.write(match_losser_df)
+    st.write(match_loser_df)
     
     st.write(match_winner_data.head())
     st.write(match_losser_data.head())
