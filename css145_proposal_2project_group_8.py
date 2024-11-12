@@ -50,9 +50,6 @@ from sklearn.metrics import mean_absolute_error
 import pandas as pd
 # Load the challenger match data for initial analysis
 
-
-file = st.file_uploader("upload:")
-
 # Function to read data from a CSV file
 def read_data(file):
     df = pd.read_csv(file, encoding='gbk')
@@ -68,6 +65,10 @@ match_loser_file = st.file_uploader("Upload Match Loser Data (match_loser_data_v
 
 # Check if files are uploaded
 if challenger_file is not None and match_winner_file is not None and match_loser_file is not None:
+
+    challenger_df = pd.read_csv('challenger_match.csv')
+    match_winner_data = pd.read_csv('match_winner_data_version1.csv')
+    match_losser_data = pd.read_csv('match_loser_data_version1.csv')
     
     st.write(match_winner_data.head())
     st.write(match_losser_data.head())
