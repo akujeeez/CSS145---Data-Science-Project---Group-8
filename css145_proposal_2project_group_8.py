@@ -183,18 +183,19 @@ if challenger_file is not None and match_winner_file is not None and match_loser
     """
     
     # Display the first few rows of the DataFrame
-    challenger_df.head()
+
+    st.write(challenger_df.head())
     
-    challenger_df.duplicated()
+    st.write(challenger_df.duplicated())
     
-    challenger_df.info()
+    st.write(challenger_df.info())
     
-    challenger_df.isnull().sum()
+    st.write(challenger_df.isnull().sum())
     
-    challenger_df = challenger_df.dropna()
-    challenger_df.head()
+    st.write(challenger_df = challenger_df.dropna())
+    st.write(challenger_df.head())
     
-    challenger_df.info()
+    st.write(challenger_df.info())
     
     # Get unique values in 'role'
     st.write("Unique Roles:", challenger_df['role'].unique())
