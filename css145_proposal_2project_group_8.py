@@ -53,14 +53,21 @@ import pandas as pd
 
 file = st.file_uploader("upload:")
 
-
-def read_data(filename):
-    df = pd.read_csv(filename, encoding='gbk')
+# Function to read data from a CSV file
+def read_data(file):
+    df = pd.read_csv(file, encoding='gbk')
     return df
-    
-challenger_df = pd.read_csv('challenger_match.csv', delimiter=';',header=None)
-match_winner_data = pd.read_csv('match_winner_data_version1.csv', delimiter=';',header=None)
-match_losser_data = pd.read_csv('match_loser_data_version1.csv', delimiter=';',header=None)
+
+# Streamlit application
+st.title("Upload CSV Files")
+
+# File uploader for the three CSV files
+challenger_file = st.file_uploader("Upload Challenger Match Data (challenger_match.csv)", type="csv")
+match_winner_file = st.file_uploader("Upload Match Winner Data (match_winner_data_version1.csv)", type="csv")
+match_loser_file = st.file_uploader("Upload Match Loser Data (match_loser_data_version1.csv)", type="csv")
+
+# Check if files are uploaded
+if challenger_file is not None and match_winner_file is not None and match_loser_file is not None:
 
 st.write(match_winner_data.head())
 st.write(match_losser_data.head())
