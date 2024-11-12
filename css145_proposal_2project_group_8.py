@@ -49,7 +49,6 @@ from sklearn.metrics import mean_absolute_error
 
 csv_files = [
     'challenger_match.csv',
-    'match_data_version1.csv',
     'match_loser_data_version1.csv',
     'match_winner_data_version1.csv'
 ]
@@ -70,15 +69,8 @@ challenger_df = pd.read_csv('challenger_match.csv')
 st.write(challenger_df.head())  # View the first few rows
 st.write(challenger_df.info())  # Get a summary of columns, types, and null values
 
-# Load the 'match_data_version1.csv' dataset
-match_data_df = pd.read_csv('/root/.cache/kagglehub/datasets/gyejr95/league-of-legendslol-ranked-games-2020-ver1/versions/4/match_data_version1.csv')
-
-# Display the first few rows and basic info about the dataset
-st.write(match_data_df.head())
-st.write(match_data_df.info())
-
-match_winner_data = pd.read_csv('/content/match_winner_data_version1.csv')
-match_losser_data = pd.read_csv('/content/match_loser_data_version1.csv')
+match_winner_data = pd.read_csv('match_winner_data_version1.csv')
+match_losser_data = pd.read_csv('match_loser_data_version1.csv')
 
 st.write(match_winner_data.head())
 st.write(match_losser_data.head())
@@ -175,7 +167,7 @@ With stacked bar segments signifying the number of a specific role in that lane 
 Players, analysts, and coaches that wish to research trends and improve tactics based on role distributions can benefit from data-driven decision-making.
 """
 
-file_path = '/content/challenger_match.csv'  # Replace with the actual path to your CSV file
+file_path = 'challenger_match.csv'  # Replace with the actual path to your CSV file
 challenger_df = pd.read_csv(file_path)
 
 # Display the first few rows of the DataFrame
@@ -200,66 +192,6 @@ st.write("Unique Lanes:", challenger_df['lane'].unique())
 
 # Get unique values in 'season'
 st.write("Unique Seasons:", challenger_df['season'].unique())
-
-# Display column names and data types to identify numeric columns
-st.write("Columns in match_data_version1.csv:", match_data_df.columns)
-st.write("\nData Types:\n", match_data_df.dtypes)
-
-# Assuming 'match_data_df' is already loaded
-# Convert 'gameDuration' to numeric (in case of invalid data)
-match_data_df['gameDuration'] = pd.to_numeric(match_data_df['gameDuration'], errors='coerce')
-
-# Check the distribution of game durations
-duration_counts = match_data_df['gameDuration'].value_counts()
-
-# st.write the counts of different durations
-st.write(duration_counts)
-
-# Find the match with the highest game duration
-highest_duration_row = match_data_df.loc[match_data_df['gameDuration'].idxmax()]
-st.write("Match with the highest duration:")
-st.write(highest_duration_row)
-
-# Plotting the frequency distribution of game durations
-plt.figure(figsize=(10, 6))
-plt.bar(duration_counts.index, duration_counts.values, color='blue', alpha=0.7, edgecolor='darkorange')
-plt.title('Frequency Distribution of Game Duration')
-plt.xlabel('Game Duration (in seconds)')
-plt.ylabel('Frequency')
-plt.xticks(rotation=45)
-plt.grid(axis='y')
-st.plt.show()
-
-"""The distribution of game durations from the match_data_df DataFrame, which might include League of Legends match information, is analyzed and visualized by this code block. The code computes the distribution of game durations, turns the gameDuration column into a numeric value, and uses idxmax() to identify the match with the longest duration. After that, the code generates a bar plot of the frequency distribution that displays the frequency of matches with varying lengths as well as the st.writeed counts.
-
-<br>
-
-A bar chart that displays the frequency of matches of various durations and st.writeed counts that show the frequency of each game time in the dataset are examples of observations and interpretations. While outliers, like extremely short or long durations, may suggest special match conditions, peaks in the distribution might reflect average game lengths.
-
-<br>
-
-Performance measurements, outlier identification, and gameplay analysis can all benefit from this representation. This data can be used by analysts and players to determine the most typical game lengths and modify their tactics appropriately. Extremely short or long matches are examples of outliers that may indicate abnormalities, bugs, or special match circumstances. All things considered, this code block offers insightful information about how League of Legends game lengths are distributed.
-"""
-
-# Assuming 'match_data_df' is already loaded
-unique_game_modes = match_data_df['gameMode'].unique()
-
-# Display the unique game modes
-st.write(unique_game_modes)
-
-# Assuming you want to analyze 'gameDuration' instead of 'IMDb score' for match data
-
-# Count the unique values in 'gameDuration'
-game_duration_counts = match_data_df['gameDuration'].value_counts()
-st.write(game_duration_counts)
-
-# Round the 'gameDuration' values and create a new column 'gameDuration_Rounded'
-match_data_df['gameDuration_Rounded'] = match_data_df['gameDuration'].round()
-st.write(match_data_df['gameDuration_Rounded'])
-
-# Check the unique values in the 'gameDuration_Rounded' column
-unique_game_durations = match_data_df['gameDuration_Rounded'].unique()
-st.write(unique_game_durations)
 
 # Assuming you have a dataframe like 'match_winner_data' already loaded and contains the relevant columns
 
@@ -725,7 +657,7 @@ def plot_results(y_test, y_pred):
     st.plt.show()
 
 # Main Execution
-data = load_data('/content/challenger_match.csv')  # Replace with your dataset path
+data = load_data('challenger_match.csv')  # Replace with your dataset path
 preprocessor, X, y = preprocess_data(data)
 model, X_test, y_test, y_pred = train_model(preprocessor, X, y)
 
