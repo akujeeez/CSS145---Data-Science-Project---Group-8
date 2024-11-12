@@ -69,7 +69,7 @@ challenger_df = pd.read_csv('challenger_match.csv')
 st.write(challenger_df.head())  # View the first few rows
 st.write(challenger_df.info())  # Get a summary of columns, types, and null values
 
-match_winner_data = pd.read_csv('match_winner_data_version1.csv')
+match_winner_data = pd.read_csv('match_winner_data_version1.csv',sys.stdin, header=None, delim_whitespace=True)
 match_losser_data = pd.read_csv('match_loser_data_version1.csv')
 
 st.write(match_winner_data.head())
