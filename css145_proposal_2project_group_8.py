@@ -51,6 +51,13 @@ import pandas as pd
 # Load the challenger match data for initial analysis
 
 
+file = st.file_uploader("upload:")
+
+
+def read_data(filename):
+    df = pd.read_csv(filename, encoding='gbk')
+    return df
+    
 challenger_df = pd.read_csv('challenger_match.csv', delimiter=';',header=None)
 match_winner_data = pd.read_csv('match_winner_data_version1.csv', delimiter=';',header=None)
 match_losser_data = pd.read_csv('match_loser_data_version1.csv', delimiter=';',header=None)
