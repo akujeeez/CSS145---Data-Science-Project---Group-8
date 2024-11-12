@@ -851,3 +851,5 @@ A game model's research and visualizations highlight important seasonal trends t
 
 Important information about seasonal trends and patterns in the data was revealed by the analysis and forecasting model. Further development and investigation of more sophisticated models may increase prediction accuracy and provide deeper insights into game data trends, even if machine learning in particular, linear regression that was able to predict future values.
 """
+else:
+    st.info("Please upload all three CSV files to proceed.")
