@@ -472,7 +472,26 @@ if challenger_file is not None and match_winner_file is not None and match_loser
     
     """
     
-   # Find the best ARIMA model automatically
+    # Residuals
+    residuals = arima_model_fit.resid
+    
+    # Plot residuals to check for any patterns
+    plt.figure(figsize=(10, 6))
+    plt.plot(residuals)
+    plt.title('Residuals of ARIMA Model')
+    st.pyplot(plt)
+    
+    # Check residuals summary
+    st.write(residuals.describe())
+    
+    # Check if residuals are normally distributed
+    sns.histplot(residuals, kde=True)
+    plt.title('Distribution of Residuals')
+    st.pyplot(plt)
+    
+    """The disparities between actual and anticipated values, or the model's errors, are known as the residuals of the ARIMA model. The residuals of a successful ARIMA model should have a mean that is near zero and a steady distribution around zero. To determine if the residuals are normally distributed, a histogram including the kernel density estimate (KDE) is employed. It indicates that the model has successfully captured the underlying dynamics of the data if the residuals plot displays no obvious pattern."""
+    
+        # Find the best ARIMA model automatically
     auto_model = auto_arima(data['role_encoded'], seasonal=True, m=1, stepwise=True, trace=True)
     
     # Fit the selected model
@@ -508,25 +527,13 @@ if challenger_file is not None and match_winner_file is not None and match_loser
     plt.ylabel("Role Encoded Value")
     plt.legend()
     st.pyplot(plt)
+        
+    """Future patterns for the upcoming five seasons are forecast using the ARIMA model. The confidence intervals show the range of values that the genuine value could fall within, while the predicted values are based on historical role-encoded data. The graphic displays the predicted values, the confidence intervals, and the historical role-encoded data. The predicted values are shown by the orange line, and the confidence intervals that which show the degree of uncertainty surrounding the forecast that are shown by the shaded area.
     
-    # Residuals
-    residuals = auto_model_fit.resid
+    <br>
     
-    # Plot residuals to check for any patterns
-    plt.figure(figsize=(10, 6))
-    plt.plot(residuals)
-    plt.title('Residuals of ARIMA Model')
-    st.pyplot(plt)
-    
-    # Check residuals summary
-    st.write(residuals.describe())
-    
-    # Check if residuals are normally distributed
-    plt.figure(figsize=(10, 6))  # Create a new figure for the histogram
-    sns.histplot(residuals, kde=True)
-    plt.title('Distribution of Residuals')
-    st.pyplot(plt)
-
+    The past data, shown by the blue line, demonstrates the trend or patterns that the model is trying to identify and predict for the future. Wide confidence intervals could suggest that the model's forecasts for upcoming seasons are not entirely certain. Adding new features, adjusting the ARIMA model's parameters, or investigating alternative time series models like SARIMA can all help increase accuracy.
+    """
     
     # Check if seasonality exists in the data
     plt.figure(figsize=(10, 6))
