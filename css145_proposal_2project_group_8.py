@@ -48,10 +48,10 @@ from pmdarima import auto_arima
 from sklearn.metrics import mean_absolute_error
 
 csv_files = [
-    '/root/.cache/kagglehub/datasets/gyejr95/league-of-legendslol-ranked-games-2020-ver1/versions/4/challenger_match.csv',
+    'challenger_match.csv',
     '/root/.cache/kagglehub/datasets/gyejr95/league-of-legendslol-ranked-games-2020-ver1/versions/4/match_data_version1.csv',
-    '/root/.cache/kagglehub/datasets/gyejr95/league-of-legendslol-ranked-games-2020-ver1/versions/4/match_loser_data_version1.csv',
-    '/root/.cache/kagglehub/datasets/gyejr95/league-of-legendslol-ranked-games-2020-ver1/versions/4/match_winner_data_version1.csv'
+    'match_loser_data_version1.csv',
+    'match_winner_data_version1.csv'
 ]
 
 dataframes = [pd.read_csv(file) for file in csv_files]
@@ -64,7 +64,7 @@ for i, df in enumerate(dataframes):
 
 import pandas as pd
 # Load the challenger match data for initial analysis
-challenger_df = pd.read_csv('/root/.cache/kagglehub/datasets/gyejr95/league-of-legendslol-ranked-games-2020-ver1/versions/4/challenger_match.csv')
+challenger_df = pd.read_csv('challenger_match.csv')
 
 # Display the first few rows and basic info about the challenger dataset
 st.write(challenger_df.head())  # View the first few rows
