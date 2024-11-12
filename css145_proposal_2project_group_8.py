@@ -59,40 +59,40 @@ dataframes = [pd.read_csv(file) for file in csv_files]
 
 # Display data
 for i, df in enumerate(dataframes):
-    print(f"Data # {i + 1}:")
-    print(df)
-    print("\n")
+    st.write(f"Data # {i + 1}:")
+    st.write(df)
+    st.write("\n")
 
 import pandas as pd
 # Load the challenger match data for initial analysis
 challenger_df = pd.read_csv('/root/.cache/kagglehub/datasets/gyejr95/league-of-legendslol-ranked-games-2020-ver1/versions/4/challenger_match.csv')
 
 # Display the first few rows and basic info about the challenger dataset
-print(challenger_df.head())  # View the first few rows
-print(challenger_df.info())  # Get a summary of columns, types, and null values
+st.write(challenger_df.head())  # View the first few rows
+st.write(challenger_df.info())  # Get a summary of columns, types, and null values
 
 # Load the 'match_data_version1.csv' dataset
 match_data_df = pd.read_csv('/root/.cache/kagglehub/datasets/gyejr95/league-of-legendslol-ranked-games-2020-ver1/versions/4/match_data_version1.csv')
 
 # Display the first few rows and basic info about the dataset
-print(match_data_df.head())
-print(match_data_df.info())
+st.write(match_data_df.head())
+st.write(match_data_df.info())
 
 match_winner_data = pd.read_csv('/content/match_winner_data_version1.csv')
 match_losser_data = pd.read_csv('/content/match_loser_data_version1.csv')
 
-print(match_winner_data.head())
-print(match_losser_data.head())
+st.write(match_winner_data.head())
+st.write(match_losser_data.head())
 
 # Check for missing values
 missing_values = challenger_df.isnull().sum()
-print("Missing values per column:")
-print(missing_values)
+st.write("Missing values per column:")
+st.write(missing_values)
 
 # Summary statistics for numerical columns
 descriptive_stats = challenger_df.describe()
-print("Descriptive statistics for numerical columns:")
-print(descriptive_stats)
+st.write("Descriptive statistics for numerical columns:")
+st.write(descriptive_stats)
 
 numerical_features = challenger_df.select_dtypes(include=['number']).columns
 numerical_df = challenger_df[numerical_features]
@@ -100,7 +100,7 @@ numerical_df = challenger_df[numerical_features]
 plt.figure(figsize=(10, 8))
 sns.heatmap(numerical_df.corr(), annot=True, cmap="coolwarm")
 plt.title("Feature Correlations")
-plt.show()
+st.plt.show()
 
 """A heatmap that shows the relationship between the challenger_df DataFrame's numerical attributes. For the numerical features, it computes the correlation matrix after choosing columns with numerical data types. In order to display the correlation values in each cell, sns.heatmap(numerical_df.corr(), annot=True, cmap="coolwarm") is used to construct the heatmap graphic. The "coolwarm" color map setting is used to show whether there is a positive or negative link. To improve readability, figsize=(10, 8) is used to present the plot.
 
@@ -113,14 +113,14 @@ sns.countplot(data=challenger_df, x='role')
 plt.xlabel('Role')
 plt.ylabel('Count')
 plt.title('Distribution of Roles')
-plt.show()
+st.plt.show()
 
 # Plotting the lane distribution
 sns.countplot(data=challenger_df, x='lane')
 plt.xlabel('Lane')
 plt.ylabel('Count')
 plt.title('Distribution of Lanes')
-plt.show()
+st.plt.show()
 
 """To see the distribution of role and lane categories within the challenger_df DataFrame that which most likely contains data from the League of Legends dataset that the code blocks create count charts. Different player roles' frequency in the dataset is indicated by the first figure, which counts and shows the number of observations for each distinct value in the role column. How frequently certain lanes are represented in the data is displayed in the second figure, which displays the distribution of the lane column.
 
@@ -134,7 +134,7 @@ sns.countplot(data=challenger_df, x='season')
 plt.xlabel('Season')
 plt.ylabel('Count')
 plt.title('Games per Season')
-plt.show()
+st.plt.show()
 
 """The seasons are shown on the x-axis, and "Count" is written on the y-axis. A brief visual examination of the quantity of games recorded for each season in the dataset is then provided by the plot, which is subsequently generated. Finding trends, figuring out the distribution of data, and researching variations in player behavior or game meta over time can all benefit from this.
 
@@ -144,12 +144,12 @@ While low counts point to possible gaps in data collection or limited data avail
 """
 
 # Check unique gameId and accountId counts
-print("Unique game IDs:", challenger_df['gameId'].nunique())
-print("Unique account IDs:", challenger_df['accountId'].nunique())
+st.write("Unique game IDs:", challenger_df['gameId'].nunique())
+st.write("Unique account IDs:", challenger_df['accountId'].nunique())
 
 # Check for duplicate rows
 duplicates = challenger_df.duplicated().sum()
-print(f"Number of duplicate rows: {duplicates}")
+st.write(f"Number of duplicate rows: {duplicates}")
 
 # Frequency of roles by lane
 role_lane_counts = challenger_df.groupby(['lane', 'role']).size().unstack()
@@ -158,7 +158,7 @@ plt.xlabel('Lane')
 plt.ylabel('Count')
 plt.title('Role Frequency by Lane')
 plt.legend(title='Role')
-plt.show()
+st.plt.show()
 
 """To create a stacked bar chart to display the challenger_df DataFrame's player role distribution across several lanes. In League of Legends, where roles and lanes are essential elements of gameplay, this is especially pertinent. Plotting a stacked bar chart with each bar representing the number of distinct roles within a lane is done by the code snippet after grouping the data by lane and role using the unstack() technique.
 
@@ -194,17 +194,17 @@ challenger_df.head()
 challenger_df.info()
 
 # Get unique values in 'role'
-print("Unique Roles:", challenger_df['role'].unique())
+st.write("Unique Roles:", challenger_df['role'].unique())
 
 # Get unique values in 'lane'
-print("Unique Lanes:", challenger_df['lane'].unique())
+st.write("Unique Lanes:", challenger_df['lane'].unique())
 
 # Get unique values in 'season'
-print("Unique Seasons:", challenger_df['season'].unique())
+st.write("Unique Seasons:", challenger_df['season'].unique())
 
 # Display column names and data types to identify numeric columns
-print("Columns in match_data_version1.csv:", match_data_df.columns)
-print("\nData Types:\n", match_data_df.dtypes)
+st.write("Columns in match_data_version1.csv:", match_data_df.columns)
+st.write("\nData Types:\n", match_data_df.dtypes)
 
 # Assuming 'match_data_df' is already loaded
 # Convert 'gameDuration' to numeric (in case of invalid data)
@@ -213,13 +213,13 @@ match_data_df['gameDuration'] = pd.to_numeric(match_data_df['gameDuration'], err
 # Check the distribution of game durations
 duration_counts = match_data_df['gameDuration'].value_counts()
 
-# Print the counts of different durations
-print(duration_counts)
+# st.write the counts of different durations
+st.write(duration_counts)
 
 # Find the match with the highest game duration
 highest_duration_row = match_data_df.loc[match_data_df['gameDuration'].idxmax()]
-print("Match with the highest duration:")
-print(highest_duration_row)
+st.write("Match with the highest duration:")
+st.write(highest_duration_row)
 
 # Plotting the frequency distribution of game durations
 plt.figure(figsize=(10, 6))
@@ -229,13 +229,13 @@ plt.xlabel('Game Duration (in seconds)')
 plt.ylabel('Frequency')
 plt.xticks(rotation=45)
 plt.grid(axis='y')
-plt.show()
+st.plt.show()
 
-"""The distribution of game durations from the match_data_df DataFrame, which might include League of Legends match information, is analyzed and visualized by this code block. The code computes the distribution of game durations, turns the gameDuration column into a numeric value, and uses idxmax() to identify the match with the longest duration. After that, the code generates a bar plot of the frequency distribution that displays the frequency of matches with varying lengths as well as the printed counts.
+"""The distribution of game durations from the match_data_df DataFrame, which might include League of Legends match information, is analyzed and visualized by this code block. The code computes the distribution of game durations, turns the gameDuration column into a numeric value, and uses idxmax() to identify the match with the longest duration. After that, the code generates a bar plot of the frequency distribution that displays the frequency of matches with varying lengths as well as the st.writeed counts.
 
 <br>
 
-A bar chart that displays the frequency of matches of various durations and printed counts that show the frequency of each game time in the dataset are examples of observations and interpretations. While outliers, like extremely short or long durations, may suggest special match conditions, peaks in the distribution might reflect average game lengths.
+A bar chart that displays the frequency of matches of various durations and st.writeed counts that show the frequency of each game time in the dataset are examples of observations and interpretations. While outliers, like extremely short or long durations, may suggest special match conditions, peaks in the distribution might reflect average game lengths.
 
 <br>
 
@@ -246,21 +246,21 @@ Performance measurements, outlier identification, and gameplay analysis can all 
 unique_game_modes = match_data_df['gameMode'].unique()
 
 # Display the unique game modes
-print(unique_game_modes)
+st.write(unique_game_modes)
 
 # Assuming you want to analyze 'gameDuration' instead of 'IMDb score' for match data
 
 # Count the unique values in 'gameDuration'
 game_duration_counts = match_data_df['gameDuration'].value_counts()
-print(game_duration_counts)
+st.write(game_duration_counts)
 
 # Round the 'gameDuration' values and create a new column 'gameDuration_Rounded'
 match_data_df['gameDuration_Rounded'] = match_data_df['gameDuration'].round()
-print(match_data_df['gameDuration_Rounded'])
+st.write(match_data_df['gameDuration_Rounded'])
 
 # Check the unique values in the 'gameDuration_Rounded' column
 unique_game_durations = match_data_df['gameDuration_Rounded'].unique()
-print(unique_game_durations)
+st.write(unique_game_durations)
 
 # Assuming you have a dataframe like 'match_winner_data' already loaded and contains the relevant columns
 
@@ -283,7 +283,7 @@ plt.title('Frequency Distribution of Key Game Events')
 plt.xlabel('Game Events')
 plt.ylabel('Frequency of Occurrence')
 plt.xticks(rotation=45)
-plt.show()
+st.plt.show()
 
 """A visual representation of the frequency distribution of important League of Legends game events. A bar chart, which shows the frequency of each significant event across all matches in the dataset, is used to examine the data. The color scheme is used to create a visually striking and captivating bar chart.
 
@@ -303,11 +303,11 @@ columns_to_check = ['win', 'firstBlood', 'firstTower', 'firstInhibitor',
 
 # For winner dataset
 for column in columns_to_check:
-    print(f"Winner dataset - {column} unique values:\n", match_winner_data[column].unique(), "\n")
+    st.write(f"Winner dataset - {column} unique values:\n", match_winner_data[column].unique(), "\n")
 
 # For loser dataset
 for column in columns_to_check:
-    print(f"Loser dataset - {column} unique values:\n", match_losser_data[column].unique(), "\n")
+    st.write(f"Loser dataset - {column} unique values:\n", match_losser_data[column].unique(), "\n")
 
 # Convert boolean columns to integers (True -> 1, False -> 0) for both datasets
 columns_to_check = [
@@ -325,8 +325,8 @@ winner_event_counts = match_winner_data[columns_to_check].sum()
 loser_event_counts = match_losser_data[columns_to_check].sum()
 
 # Display the counts for both datasets
-print("Winner event counts:\n", winner_event_counts)
-print("Loser event counts:\n", loser_event_counts)
+st.write("Winner event counts:\n", winner_event_counts)
+st.write("Loser event counts:\n", loser_event_counts)
 
 plt.figure(figsize=(12, 8))
 
@@ -350,7 +350,7 @@ plt.xticks(rotation=45)
 plt.tight_layout()
 
 # Show the plot
-plt.show()
+st.plt.show()
 
 """In a League of Legends dataset, the algorithm generates a comparative graphic of important game events for both winners and losers. Two subplots that one for winners and one for losers are created in a 12x8 figure. A bar chart for winners is shown in the subplots, where red bars indicate poor outcomes and green bars indicate favorable ones. The winners' chart is mirrored in the plot for side-by-side comparison. The plot is then adjusted to make sure the subplots are sufficiently spaced apart and do not overlap. The analysis assists in determining the strategic distinctions between winners and losers, including the significance of early-game goals like firstBaron or firstBlood.
 
@@ -367,8 +367,8 @@ role_counts = challenger_df['role'].value_counts()
 # Get the top 10 roles (if you have more than 10 unique roles, otherwise it will return all)
 top_roles = role_counts.head(10)
 
-# Print the top roles
-print("Top 10 Roles by Frequency:\n", top_roles)
+# st.write the top roles
+st.write("Top 10 Roles by Frequency:\n", top_roles)
 
 plt.figure(figsize=(10, 6))
 
@@ -381,7 +381,7 @@ plt.xlabel('Count')
 plt.ylabel('Role')
 
 # Show the plot
-plt.show()
+st.plt.show()
 
 """To see the frequency distribution of roles in the League of Legends Challenger dataset, the code generates a count plot. With responsibilities on the y-axis and their counts on the x-axis, the display is horizontal. "Count" and "Role" are selected for the title and labels, respectively. Bars representing the most prevalent roles in the Challenger dataset are shown in the plot, arranged from most to least frequent. This aids in highlighting the most well-liked or often performed roles in the League of Legends Challenger level. Higher-count roles could be a sign of top-tier players' preferred metas or tactics.
 
@@ -390,15 +390,15 @@ plt.show()
 By using this data for strategic research, teams and athletes can better understand role trends and tailor their tactics for the most often played positions. The plot can easily be expanded to display the distribution of roles by other criteria, including player ranking, win rate, or team side. The distribution of roles and trends in the competitive League of Legends Challenger environment may be visualized with this useful tool.
 """
 
-print("Column Names in Dataset:")
-print(challenger_df.columns)
+st.write("Column Names in Dataset:")
+st.write(challenger_df.columns)
 
 # Convert 'role' to a categorical numerical value if necessary
 challenger_df['role_encoded'] = challenger_df['role'].astype('category').cat.codes
 
 # Use pairplot to uncover relationships (this is just an example, you can change columns)
 sns.pairplot(challenger_df[['lane', 'role_encoded']])
-plt.show()
+st.plt.show()
 
 """In a numerical categorical format, the 'role' column gives each distinct role value a unique integer code. This is helpful for models or graphs that rely on numbers. To find patterns or connections between roles, the code creates a pairplot by plotting the lane against the encoded role column. This graphic aids in investigating the distribution of roles in various lanes and whether some roles are more common in particular lanes. For every pair of attributes, the pairplot creates a scatter plot that illustrates how roles correspond to various lanes.
 
@@ -414,7 +414,7 @@ challenger_df['role_encoded'] = challenger_df['role'].astype('category').cat.cod
 
 # Use pairplot to uncover relationships (this is just an example, you can change columns)
 sns.pairplot(challenger_df[['season', 'role_encoded']])
-plt.show()
+st.plt.show()
 
 """Season and role_encoded are the two elements that make up the League of Legends dataset. Each distinct role has a corresponding integer in the role column, which is a category feature. For every pair of variables in the given subset of columns, the sns.pairplot() function creates a scatter plot, displaying correlations between the season and the players' encoded roles. The distribution of the encoded roles across the seasons is displayed in the scatter plot; any grouping or clustering suggests that the popularity of particular roles varies over time or that some roles are more prevalent in particular seasons. The distribution of responsibilities appears to be very stable throughout seasons if the scatter plot looks random.
 
@@ -448,8 +448,8 @@ importance = model.feature_importances_
 feature_importance = pd.Series(importance, index=features.columns)
 
 # Display feature importance
-print("Feature Importances:")
-print(feature_importance.sort_values(ascending=False))
+st.write("Feature Importances:")
+st.write(feature_importance.sort_values(ascending=False))
 
 # Assuming 'challenger_df' is your DataFrame
 
@@ -463,7 +463,7 @@ z_scores = challenger_df[numeric_cols].apply(zscore)
 outliers = (z_scores.abs() > 3).any(axis=1)
 
 # Display rows with outliers
-print("Outliers Detected (Rows):")
+st.write("Outliers Detected (Rows):")
 display(challenger_df[outliers])
 
 data = challenger_df[['season', 'role_encoded']].dropna()
@@ -475,7 +475,7 @@ data = data.sort_values('season')
 data.set_index('season', inplace=True)
 
 # Check for data consistency (look at a summary of 'role_encoded')
-print(data.describe())
+st.write(data.describe())
 
 # Fit ARIMA model for 'role_encoded'
 arima_model = ARIMA(data['role_encoded'], order=(1, 1, 1))  # Adjust the order based on the data
@@ -494,7 +494,7 @@ plt.title("Role Encoded Forecast by Season")
 plt.xlabel("Season")
 plt.ylabel("Role Encoded Value")
 plt.legend()
-plt.show()
+st.plt.show()
 
 # Visualize the distribution of 'role_encoded' across the different seasons
 plt.figure(figsize=(10, 6))
@@ -502,7 +502,7 @@ sns.countplot(data=data, x='season', hue='role_encoded')
 plt.title('Role Distribution Across Seasons')
 plt.xlabel('Season')
 plt.ylabel('Count of Roles')
-plt.show()
+st.plt.show()
 
 """In order to examine the role_encoded column and forecast future values based on historical data, this Python function prepares the challenger_df dataset. The ARIMA model is used to forecast future values based on historical data. A bar plot is generated to show how roles are distributed across the various seasons, and a projection is made for the next five seasons.
 
@@ -524,15 +524,15 @@ residuals = arima_model_fit.resid
 plt.figure(figsize=(10, 6))
 plt.plot(residuals)
 plt.title('Residuals of ARIMA Model')
-plt.show()
+st.plt.show()
 
 # Check residuals summary
-print(residuals.describe())
+st.write(residuals.describe())
 
 # Check if residuals are normally distributed
 sns.histplot(residuals, kde=True)
 plt.title('Distribution of Residuals')
-plt.show()
+st.plt.show()
 
 """The disparities between actual and anticipated values, or the model's errors, are known as the residuals of the ARIMA model. The residuals of a successful ARIMA model should have a mean that is near zero and a steady distribution around zero. To determine if the residuals are normally distributed, a histogram including the kernel density estimate (KDE) is employed. It indicates that the model has successfully captured the underlying dynamics of the data if the residuals plot displays no obvious pattern."""
 
@@ -548,7 +548,7 @@ arima_forecast_auto = auto_model_fit.predict(n_periods=forecast_seasons)
 test_data = data.tail(5)
 
 mae = mean_absolute_error(test_data['role_encoded'], arima_forecast[:len(test_data)]) # Ensure you are comparing the same number of data points.
-print(f'Mean Absolute Error: {mae}')
+st.write(f'Mean Absolute Error: {mae}')
 
 # Get forecast with confidence intervals
 forecast_values = arima_model_fit.get_forecast(steps=forecast_seasons)
@@ -565,7 +565,7 @@ plt.title("Role Encoded Forecast by Season with Confidence Intervals")
 plt.xlabel("Season")
 plt.ylabel("Role Encoded Value")
 plt.legend()
-plt.show()
+st.plt.show()
 
 """Future patterns for the upcoming five seasons are forecast using the ARIMA model. The confidence intervals show the range of values that the genuine value could fall within, while the predicted values are based on historical role-encoded data. The graphic displays the predicted values, the confidence intervals, and the historical role-encoded data. The predicted values are shown by the orange line, and the confidence intervals that which show the degree of uncertainty surrounding the forecast that are shown by the shaded area.
 
@@ -580,7 +580,7 @@ sns.boxplot(x='season', y='role_encoded', data=data)
 plt.title('Role Encoded Distribution Across Seasons')
 plt.xlabel('Season')
 plt.ylabel('Role Encoded')
-plt.show()
+st.plt.show()
 
 # Check if seasonality exists in the data
 plt.figure(figsize=(10, 6))
@@ -588,7 +588,7 @@ sns.boxplot(x='season', y='role_encoded', data=data)
 plt.title('Role Encoded Distribution Across Seasons')
 plt.xlabel('Season')
 plt.ylabel('Role Encoded')
-plt.show()
+st.plt.show()
 
 plt.tight_layout()
 
@@ -605,7 +605,7 @@ sarima_forecast = sarima_model_fit.forecast(steps=forecast_seasons)
 
 data = challenger_df[['season', 'role_encoded']].dropna()
 
-print(data.head())
+st.write(data.head())
 
 # Scaling the data
 scaler = StandardScaler()
@@ -616,7 +616,7 @@ kmeans = KMeans(n_clusters=3, random_state=42)
 data['Cluster'] = kmeans.fit_predict(scaled_data)
 
 # Check the data with assigned clusters
-print(data.head())
+st.write(data.head())
 
 # Plotting the clusters
 plt.figure(figsize=(10, 6))
@@ -625,7 +625,7 @@ plt.title('Clustering: Role Encoded vs Season')
 plt.xlabel('Season')
 plt.ylabel('Role Encoded Value')
 plt.colorbar(label='Cluster')
-plt.show()
+st.plt.show()
 
 """A scatter plot to show how data points are distributed according to role-encoded values and seasons. Each data point is given a color in the plot using cluster labels, and the color map is set to "viridis" to make differentiation simpler. By adding transparency to the points, the alpha=0.6 setting increases the visibility of overlapping points. The plot can highlight trends or patterns in the data, like the close connections between season and role encoding. Plot coloring requires a Cluster column, which should be present in the data DataFrame. To further clarify the plot, the code additionally incorporates a title, labels, and color bars."""
 
@@ -640,7 +640,7 @@ plt.plot(range(1, 11), inertia, marker='o')
 plt.title('Elbow Method for Optimal Number of Clusters')
 plt.xlabel('Number of Clusters')
 plt.ylabel('Inertia')
-plt.show()
+st.plt.show()
 
 """A Python program called the Elbow Method uses the inertia value to determine the ideal number of clusters for KMeans clustering. The code tests for 1–10 clusters and initializes an empty list to hold the inertia values for each number of clusters. The total of squared distances between samples and their nearest cluster center is the inertia, which is determined by fitting the KMeans model to the data. The "elbow point" is the point at which the rate of inertia decreases noticeably. The plot displays the inertia values against the number of clusters.
 
@@ -662,9 +662,9 @@ from sklearn.pipeline import Pipeline
 # Step 1: Load Data
 def load_data(filepath):
     data = pd.read_csv(filepath, encoding='ISO-8859-1')  # Load your League of Legends data
-    print("First 5 rows of the dataset:\n", data.head())
-    print("\nDataset Info:\n", data.info())
-    print("\nMissing values:\n", data.isnull().sum())
+    st.write("First 5 rows of the dataset:\n", data.head())
+    st.write("\nDataset Info:\n", data.info())
+    st.write("\nMissing values:\n", data.isnull().sum())
     return data
 
 # Step 2: Preprocess Data
@@ -708,9 +708,9 @@ def train_model(preprocessor, X, y):
     mse = mean_squared_error(y_test, y_pred)
     r2 = r2_score(y_test, y_pred)
 
-    print("Model Evaluation:")
-    print("Mean Squared Error (MSE):", mse)
-    print("R-squared (R²):", r2)
+    st.write("Model Evaluation:")
+    st.write("Mean Squared Error (MSE):", mse)
+    st.write("R-squared (R²):", r2)
 
     return model, X_test, y_test, y_pred
 
@@ -723,7 +723,7 @@ def plot_results(y_test, y_pred):
     plt.ylabel("Predicted Season")
     plt.title("Actual vs Predicted Season")
     plt.grid(True)
-    plt.show()
+    st.plt.show()
 
 # Main Execution
 data = load_data('/content/challenger_match.csv')  # Replace with your dataset path
@@ -749,7 +749,7 @@ df = df.rename(columns={'Unnamed: 0': 'Index', 'gameId': 'GameID', 'season': 'Se
 df = df.sort_values('Season')
 
 # Check the cleaned data
-print(df.head())
+st.write(df.head())
 
 # Example: Plotting the number of games by lane per season
 lane_counts = df.groupby(['Season', 'Lane']).size().unstack()
@@ -760,7 +760,7 @@ plt.title("Number of Games by Lane Over Time")
 plt.xlabel("Season")
 plt.ylabel("Number of Games")
 plt.grid(True)
-plt.show()
+st.plt.show()
 
 """To plot the number of games played in each lane during a season, this  generates a DataFrame. After classifying the dataset according to the columns Season and Lane, a line plot is produced using pandas' plot() method. For easier reading, the plot has grid lines, a title, and labels for the x and y axes. Each line represents a lane, the y-axis shows the number of games played in each lane, and the x-axis shows the various seasons. This illustrates how the number of games has evolved over time."""
 
@@ -778,7 +778,7 @@ plt.xlabel("Season")
 plt.ylabel("Number of Games")
 plt.legend()
 plt.grid(True)
-plt.show()
+st.plt.show()
 
 """This illustrates how to display a 5-season rolling average and the number of games played in a season. It entails counting the number of games played in each season and classifying the dataset according to the season column. In order to smooth out short-term volatility and aid in identifying long-term trends, the code then computes a rolling average using the.rolling(window=5) method.
 
@@ -815,11 +815,11 @@ plt.xlabel("Season")
 plt.ylabel("Game Data (or whatever metric you use)")
 plt.legend()
 plt.grid(True)
-plt.show()
+st.plt.show()
 
 # Evaluate the model using Mean Squared Error (MSE)
 mse = mean_squared_error(y_test, y_pred)
-print(f'Mean Squared Error: {mse}')
+st.write(f'Mean Squared Error: {mse}')
 
 """This shows how to use time series data to build a Linear Regression model that predicts a target variable, such as gameId, based on a season attribute. A Python script is used to prepare the data, divide it into training and testing sets, and then train on the training data. The target variable for the test set is then predicted using the model. To see how well the model is performing, a plot is created.
 
@@ -858,16 +858,16 @@ plt.xlabel("Season")
 plt.ylabel("Game Data (or whatever target you're predicting)")
 plt.legend()
 plt.grid(True)
-plt.show()
+st.plt.show()
 
-# You can print future predictions if needed:
-print(f"Future Predictions for the next 5 years:\n{future_predictions}")
+# You can st.write future predictions if needed:
+st.write(f"Future Predictions for the next 5 years:\n{future_predictions}")
 
 """With the help of a season variable, such gameId, this Python code illustrates how to use linear regression to forecast future values. After dividing the data into training and testing sets, a linear regression model is fitted. The maximum season value in the dataset is used by the algorithm to forecast gameId values for the ensuing five years.
 
 <br>
 
-To see the anticipated trend, the data is then plotted. By assessing the model's performance with metrics such as MSE or R2, checking for assumptions, and modifying the figure size, color, and line styles for easier readability, the model can be further enhanced. Additionally, the code allows you to print projections for the upcoming five seasons.
+To see the anticipated trend, the data is then plotted. By assessing the model's performance with metrics such as MSE or R2, checking for assumptions, and modifying the figure size, color, and line styles for easier readability, the model can be further enhanced. Additionally, the code allows you to st.write projections for the upcoming five seasons.
 
 # **Conclusion**
 
