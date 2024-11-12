@@ -115,14 +115,14 @@ if challenger_file is not None and match_winner_file is not None and match_loser
     plt.xlabel('Role')
     plt.ylabel('Count')
     plt.title('Distribution of Roles')
-    st.pyplot(plt)
+    st.pyplot()
     
     # Plotting the lane distribution
     sns.countplot(data=challenger_df, x='lane')
     plt.xlabel('Lane')
     plt.ylabel('Count')
     plt.title('Distribution of Lanes')
-    st.pyplot(plt)
+    st.pyplot()
     
     """To see the distribution of role and lane categories within the challenger_df DataFrame that which most likely contains data from the League of Legends dataset that the code blocks create count charts. Different player roles' frequency in the dataset is indicated by the first figure, which counts and shows the number of observations for each distinct value in the role column. How frequently certain lanes are represented in the data is displayed in the second figure, which displays the distribution of the lane column.
     
@@ -136,7 +136,7 @@ if challenger_file is not None and match_winner_file is not None and match_loser
     plt.xlabel('Season')
     plt.ylabel('Count')
     plt.title('Games per Season')
-    st.pyplot(plt)
+    st.pyplot()
     
     """The seasons are shown on the x-axis, and "Count" is written on the y-axis. A brief visual examination of the quantity of games recorded for each season in the dataset is then provided by the plot, which is subsequently generated. Finding trends, figuring out the distribution of data, and researching variations in player behavior or game meta over time can all benefit from this.
     
@@ -160,7 +160,7 @@ if challenger_file is not None and match_winner_file is not None and match_loser
     plt.ylabel('Count')
     plt.title('Role Frequency by Lane')
     plt.legend(title='Role')
-    st.pyplot(plt)
+    st.pyplot()
     
     """To create a stacked bar chart to display the challenger_df DataFrame's player role distribution across several lanes. In League of Legends, where roles and lanes are essential elements of gameplay, this is especially pertinent. Plotting a stacked bar chart with each bar representing the number of distinct roles within a lane is done by the code snippet after grouping the data by lane and role using the unstack() technique.
     
@@ -225,7 +225,7 @@ if challenger_file is not None and match_winner_file is not None and match_loser
     plt.xlabel('Game Events')
     plt.ylabel('Frequency of Occurrence')
     plt.xticks(rotation=45)
-    st.pyplot(plt)
+    st.pyplot()
     
     """A visual representation of the frequency distribution of important League of Legends game events. A bar chart, which shows the frequency of each significant event across all matches in the dataset, is used to examine the data. The color scheme is used to create a visually striking and captivating bar chart.
     
