@@ -49,21 +49,6 @@ from pmdarima import auto_arima
 
 from sklearn.metrics import mean_absolute_error
 
-def read_data(file):
-    # Read the uploaded file content directly into a DataFrame
-    return pd.read_csv(file)
-
-# Streamlit application
-st.title("Upload CSV Files")
-
-# File uploader for the three CSV files
-challenger_file = st.file_uploader("Upload Challenger Match Data (challenger_match.csv)", type=["csv", "txt"])
-match_winner_file = st.file_uploader("Upload Match Winner Data (match_winner_data_version1.csv)", type=["csv", "txt"])
-match_loser_file = st.file_uploader("Upload Match Loser Data (match_loser_data_version1.csv)", type=["csv", "txt"])
-
-# Check if files are uploaded
-if challenger_file is not None and match_winner_file is not None and match_loser_file is not None:
-    # Read each uploaded file using the provided file-like object from Streamlit
     challenger_df = read_data(challenger_file)
     match_winner_data = read_data(match_winner_file)
     match_loser_data = read_data(match_loser_file)
@@ -885,5 +870,3 @@ if challenger_file is not None and match_winner_file is not None and match_loser
     
     Important information about seasonal trends and patterns in the data was revealed by the analysis and forecasting model. Further development and investigation of more sophisticated models may increase prediction accuracy and provide deeper insights into game data trends, even if machine learning in particular, linear regression that was able to predict future values.
     """
-else:
-    st.info("Please upload all three CSV files to proceed.")
